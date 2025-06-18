@@ -22,9 +22,10 @@ endif
 
 SRC_DIR = src
 OBJ_DIR = obj
+BIN_DIR = bin
 SRCS    = $(shell find $(SRC_DIR) -name '*.c')
 OBJS    = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
-TARGET  = game$(EXEEXT)
+TARGET  = $(BIN_DIR)/game$(EXEEXT)
 
 all: $(TARGET)
 
