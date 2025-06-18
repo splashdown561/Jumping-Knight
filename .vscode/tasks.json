@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar todo el código",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-o", "mi_programa",
+                "$(find src -name '*.c')"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
