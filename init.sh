@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
 
     # Ejecutar el juego
     echo "Ejecutando el juego..."
-    ./game
+    ./bin/game
 else
     echo "Error en la compilación. Revisa los logs."
     exit 1
