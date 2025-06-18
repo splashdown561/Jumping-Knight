@@ -15,7 +15,7 @@ if [ $? -eq 0 ]; then
     # Subir cambios a GitHub
     echo "Enviando cambios al repositorio..."
     git add .
-    git commit -m "Compilación automática y limpieza de código"
+    git commit -m "BLANK"
     git push origin main
 
     # Ejecutar el juego
