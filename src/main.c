@@ -13,7 +13,7 @@ int main() {
     InitPlayer(&player);
 
     Camera2D camera = { 0 };
-    camera.zoom = 2.0f;
+    camera.zoom = 1.5f;
     camera.offset = (Vector2){ 512, 256 }; // Centra la cámara en la pantalla
 
     while (!WindowShouldClose()) {
