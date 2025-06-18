@@ -32,8 +32,9 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(MKDIR) $(OBJ_DIR)
+	$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
 
 clean:
 	$(RM) $(OBJ_DIR) $(TARGET)

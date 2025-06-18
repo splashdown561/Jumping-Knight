@@ -1,4 +1,0 @@
-make clean
-make
-./pull.sh
-./game
