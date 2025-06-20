@@ -1,5 +1,4 @@
-git checkout main
-git pull origin main
+echo "Enviando cambios al repositorio..."
 git add .
-git commit -m "Primer commit del juego (Archivo de versiones)"
+git commit -m "BLANK"
 git push origin main

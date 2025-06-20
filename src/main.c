@@ -14,14 +14,13 @@ int main() {
 
     Camera2D camera = { 0 };
     camera.zoom = 1.5f;
-    camera.offset = (Vector2){ 512, 256 }; // Centra la cámara en la pantalla
+    camera.offset = (Vector2){ 512, 256 };
 
     while (!WindowShouldClose()) {
         float dt = GetFrameTime();
 
         UpdatePlayer(&player, dt, platforms, numPlatforms);
 
-        // La cámara sigue al jugador
         camera.target = player.pos;
 
         BeginDrawing();
