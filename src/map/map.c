@@ -3,7 +3,7 @@
 #include <raylib.h>
 #include <math.h>
 
-extern Texture2D texPlatform;  // Debe cargarse en la inicialización global
+Texture2D texPlatform;  // Debe cargarse en la inicialización global
 
 Platform platforms[MAX_PLATFORMS];
 int numPlatforms = 0;

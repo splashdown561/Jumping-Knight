@@ -3,4 +3,4 @@ x;y;width;height;type
 100;400;64;16;platform
 200;300;64;16;platform
 300;350;32;32;spike
-200;450;32;32;platform
+200;450;100;16;platform

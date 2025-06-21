@@ -124,6 +124,15 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         moveX = MOVE_SPEED * dt;
         p->isMovingLeft = false;
     }
+
+    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_LEFT_SHIFT))
+    {
+        moveX *= 0.8;
+    } else if (IsKeyDown(KEY_RIGHT) && IsKeyDown(KEY_LEFT_SHIFT))
+    {
+        moveX *= 0.8;
+    }
+
     p->pos.x += moveX;
 
     // 2) Comprobar colisiones horizontales con plataformas
@@ -189,7 +198,7 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
             p->pos.y = playerSpawn.y;
             p->velocityY = 0;
             printf("[Spike] Colision con pincho. Reiniciando al spawn (%.1f, %.1f)\n",
-                   playerSpawn.x, playerSpawn.y);
+            playerSpawn.x, playerSpawn.y);
             break;
         }
     }
