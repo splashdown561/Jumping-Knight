@@ -95,14 +95,17 @@ static void DrawAnimation(const AnimPlayer *ap, Vector2 pos, bool flipX) {
 
 #include <player/player.h>
 #include <stdlib.h>
+#include <obj/spike.h>
+#include <CSV/csvreader.h>
+#include <stdio.h>
 
 #define GRAVITY      800.0f
 #define JUMP_FORCE  -300.0f
 #define MOVE_SPEED   200.0f
 
-void InitPlayer(Player *p) {
+void InitPlayer(Player *p, Vector2 *playerSpawn) {
     // Posición y tamaño iniciales
-    p->pos = (Vector2){ 200, 300 };
+    p->pos = *playerSpawn;
     p->size = (Vector2){ 14, 19 }; // x, y
     p->velocityY = 0;
     p->isJumping = false;
@@ -118,17 +121,16 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         moveX = -MOVE_SPEED * dt;
         p->isMovingLeft = true;
     } else if (IsKeyDown(KEY_RIGHT)) {
-        moveX =  MOVE_SPEED * dt;
+        moveX = MOVE_SPEED * dt;
         p->isMovingLeft = false;
     }
     p->pos.x += moveX;
 
-    // Comprueba colisión en X con cada plataforma
-    Rectangle playerRect = { p->pos.x, p->pos.y, p->size.x, p->size.y }; // Usamos Rectangle de Raylib
+    // 2) Comprobar colisiones horizontales con plataformas
+    Rectangle playerRect = { p->pos.x, p->pos.y, p->size.x, p->size.y };
     for (int i = 0; i < numPlatforms; i++) {
         if (!platforms[i].active) continue;
         if (CheckCollisionRecs(playerRect, platforms[i].rec)) {
-            // Resolver colisión horizontal
             if (moveX > 0) {
                 p->pos.x = platforms[i].rec.x - p->size.x;
             } else if (moveX < 0) {
@@ -138,28 +140,37 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         }
     }
 
-    // 2) Saltar
-    if (IsKeyPressed(KEY_C) && !p->isJumping) {
-        p->velocityY = JUMP_FORCE;
-        p->isJumping = true;
+    // 3) Detectar si está en el suelo (grounded)
+    Rectangle feetRect = { p->pos.x, p->pos.y + p->size.y + 1, p->size.x, 2 };
+    bool grounded = false;
+    for (int i = 0; i < numPlatforms; i++) {
+        if (!platforms[i].active) continue;
+        if (CheckCollisionRecs(feetRect, platforms[i].rec)) {
+            grounded = true;
+            break;
+        }
     }
 
-    // 3) Aplicar gravedad
+    // 4) Saltar (solo si grounded)
+    if (IsKeyPressed(KEY_C) && grounded) {
+        p->velocityY = JUMP_FORCE;
+    }
+
+    // 5) Aplicar siempre gravedad
     p->velocityY += GRAVITY * dt;
     p->pos.y += p->velocityY * dt;
 
-    // Comprueba colisión en Y con cada plataforma
+    // 6) Resolver colisiones verticales con plataformas
     playerRect.y = p->pos.y;
     for (int i = 0; i < numPlatforms; i++) {
         if (!platforms[i].active) continue;
         Rectangle plat = platforms[i].rec;
         if (CheckCollisionRecs(playerRect, plat)) {
             if (p->velocityY > 0) {
-                // Estaba cayendo: apoyar sobre la plataforma
+                // cayendo → apoyar sobre la plataforma
                 p->pos.y = plat.y - p->size.y;
-                p->isJumping = false;
             } else if (p->velocityY < 0) {
-                // Subiendo: chocar la cabeza
+                // subiendo → chocar la cabeza
                 p->pos.y = plat.y + plat.height;
             }
             p->velocityY = 0;
@@ -167,9 +178,25 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         }
     }
 
-    // 4) Actualizar animación
+    // 7) Actualizar animación según estado
     UpdateAnimation(&p->ap, dt, p);
+
+    // 8) Comprobar colisión con pinchos
+    for (int i = 0; i < numSpikes; i++) {
+        if (CheckCollisionRecs(playerRect, spikes[i].rec)) {
+            // Reiniciar al spawn
+            p->pos.x = playerSpawn.x;
+            p->pos.y = playerSpawn.y;
+            p->velocityY = 0;
+            printf("[Spike] Colision con pincho. Reiniciando al spawn (%.1f, %.1f)\n",
+                   playerSpawn.x, playerSpawn.y);
+            break;
+        }
+    }
 }
+
+
+
 
 void DrawPlayer(const Player *p) {
     // Dibuja la animación actual en p->pos

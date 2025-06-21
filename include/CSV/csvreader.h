@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <CSV/csv.h>
+#include <raylib.h>
+
+extern Vector2 playerSpawn;
 
 typedef struct {
 	float x, y, width, height;
@@ -16,6 +19,7 @@ typedef struct {
 	CSVRec rect;
 	ObjectType type;
 } GameObject;
+
 
 void LoadMapFromCSV(const char* filename);
 

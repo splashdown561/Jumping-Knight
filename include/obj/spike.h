@@ -21,6 +21,6 @@ extern int numSpikes;
 
 void DrawSpikes(void);
 
-void CheckSpikeCollision(Rectangle *playerRect, Vector2 spawn);
+void CheckSpikeCollision(Rectangle *playerRect);
 
 #endif

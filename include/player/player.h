@@ -18,7 +18,7 @@ typedef struct Player {
 } Player;
 
 // Inicializa el jugador y sus animaciones
-void InitPlayer(Player *p);
+void InitPlayer(Player *p, Vector2 *playerSpawn);
 
 // Actualiza lógica de jugador y animaciones, comprobando colisiones con plataformas
 void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms);

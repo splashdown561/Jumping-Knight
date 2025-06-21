@@ -3,7 +3,8 @@
         "player.h": "c",
         "animations.h": "c",
         "raylib.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "csvreader.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
