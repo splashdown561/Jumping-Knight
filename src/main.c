@@ -17,6 +17,8 @@ int main() {
     InitPlayer(&player, &playerSpawn);  // Usa el spawn cargado
 
     Camera2D camera = { 0 };
+    Texture2D texPlatform;
+    texPlatform = LoadTexture("assets/testplayer.png");
     camera.zoom = 1.5f;
     camera.offset = (Vector2){ 512, 256 };
     Rectangle playerRect = { player.pos.x, player.pos.y, player.size.x, player.size.y };
@@ -43,6 +45,7 @@ int main() {
     }
 
     UnloadPlayer(&player);
+    UnloadTexture(texPlatform);
     CloseWindow();
     return 0;
 }
