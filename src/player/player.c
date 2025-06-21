@@ -102,6 +102,7 @@ static void DrawAnimation(const AnimPlayer *ap, Vector2 pos, bool flipX) {
 #define GRAVITY      800.0f
 #define JUMP_FORCE  -300.0f
 #define MOVE_SPEED   200.0f
+#define RUN_SPEED    205.0f
 
 void InitPlayer(Player *p, Vector2 *playerSpawn) {
     // Posición y tamaño iniciales
@@ -125,13 +126,11 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         p->isMovingLeft = false;
     }
 
-    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_LEFT_SHIFT))
+    if ((IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT)) && IsKeyDown(KEY_LEFT_SHIFT)) 
     {
-        moveX *= 0.8;
-    } else if (IsKeyDown(KEY_RIGHT) && IsKeyDown(KEY_LEFT_SHIFT))
-    {
-        moveX *= 0.8;
-    }
+		moveX *= 2;
+	}
+	p->pos.x += moveX * dt;
 
     p->pos.x += moveX;
 
