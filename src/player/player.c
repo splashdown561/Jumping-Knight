@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define GRAVITY      800
-#define JUMP_FORCE  -300
-#define MOVE_SPEED   200
+#define GRAVITY      800.0f
+#define JUMP_FORCE  -300.0f
+#define MOVE_SPEED   200.0f
 
 // --- Helpers de animación ---
 
@@ -124,16 +124,14 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
     p->pos.x += moveX;
 
     // Comprueba colisión en X con cada plataforma
-    Rectangle playerRect = { p->pos.x, p->pos.y, p->size.x, p->size.y };
+    Rectangle playerRect = { p->pos.x, p->pos.y, p->size.x, p->size.y }; // Usamos Rectangle de Raylib
     for (int i = 0; i < numPlatforms; i++) {
         if (!platforms[i].active) continue;
         if (CheckCollisionRecs(playerRect, platforms[i].rec)) {
             // Resolver colisión horizontal
             if (moveX > 0) {
-                // viniendo desde la izquierda
                 p->pos.x = platforms[i].rec.x - p->size.x;
             } else if (moveX < 0) {
-                // viniendo desde la derecha
                 p->pos.x = platforms[i].rec.x + platforms[i].rec.width;
             }
             playerRect.x = p->pos.x;
@@ -157,11 +155,11 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
         Rectangle plat = platforms[i].rec;
         if (CheckCollisionRecs(playerRect, plat)) {
             if (p->velocityY > 0) {
-                // estaba cayendo: apoyar sobre la plataforma
+                // Estaba cayendo: apoyar sobre la plataforma
                 p->pos.y = plat.y - p->size.y;
                 p->isJumping = false;
             } else if (p->velocityY < 0) {
-                // subiendo: chocar la cabeza
+                // Subiendo: chocar la cabeza
                 p->pos.y = plat.y + plat.height;
             }
             p->velocityY = 0;

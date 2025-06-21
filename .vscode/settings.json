@@ -2,7 +2,8 @@
     "files.associations": {
         "player.h": "c",
         "animations.h": "c",
-        "raylib.h": "c"
+        "raylib.h": "c",
+        "stdbool.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

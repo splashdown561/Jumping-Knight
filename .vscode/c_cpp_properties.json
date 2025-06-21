@@ -9,8 +9,20 @@
             "defines": [],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
+            "cppStandard": "c++17",
+        
+            "name": "Window",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src"
+            ],
+            "defines": [],
+            "compilerPath": "C:\\raylib\\w64devkit\\bin\\gcc.exe",
+            "cStandard": "c11",
             "cppStandard": "c++17"
         }
     ],
     "version": 4
 }
+
+

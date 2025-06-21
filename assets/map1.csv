@@ -1,0 +1,6 @@
+s;x;y;
+spawn;200;300
+x;y;width;height;type
+100;400;64;16;platform
+200;300;64;16;platform
+300;350;32;32;spike

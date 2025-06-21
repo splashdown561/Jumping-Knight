@@ -5,7 +5,7 @@
 
 typedef struct {
 	float x, y, width, height;
-} Rectangle;
+} CSVRec;
 
 typedef enum {
 	TYPE_PLATFORM,
@@ -13,8 +13,10 @@ typedef enum {
 } ObjectType;
 
 typedef struct {
-	Rectangle rect;
+	CSVRec rect;
 	ObjectType type;
 } GameObject;
+
+void LoadMapFromCSV(const char* filename);
 
 #define MAX_OBJECTS 1024

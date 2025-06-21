@@ -4,16 +4,16 @@
 ifeq ($(OS),Windows_NT)
     # Windows settings
     EXEEXT = .exe
-    CC     = clang
+    CC     = gcc
     CFLAGS = -Wall -Wextra -std=c11 -O2 -Iinclude/
     # Link against Windows libraries for Raylib
     LDFLAGS = -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
-    RM     = del /Q
-    MKDIR  = if not exist "$(dir $@)" mkdir "$(dir $@)"
+    RM     = rm -rf
+    MKDIR  = mkdir -p
 else
     # Unix-like settings
     EXEEXT = 
-    CC     = clang
+    CC     = gccs
     CFLAGS = -Wall -Wextra -std=c11 -O2 -Iinclude/
     LDFLAGS = -lraylib -lm -ldl -lpthread -lGL
     RM     = rm -rf

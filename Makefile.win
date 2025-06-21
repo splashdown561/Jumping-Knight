@@ -1,0 +1,51 @@
+# Makefile para proyecto Raylib en Windows con W64DevKit
+
+# Forzar uso de cmd.exe como shell en Windows
+SHELL := cmd.exe
+
+# Extensión de ejecutable para Windows
+EXEEXT = .exe
+
+# Compilador y flags
+CC     = gcc
+CFLAGS = -Wall -Wextra -std=c11 -O2 -Iinclude/
+
+# Librerías para Raylib en Windows
+LDFLAGS = -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+
+# Comandos auxiliares
+RM     = rm -rf
+MKDIR  = if not exist "$(subst /,\\,$(dir $@))" mkdir "$(subst /,\\,$(dir $@))"
+
+# Directorios
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+
+# Archivos fuente y objetos
+SRCS = $(shell for /R $(SRC_DIR) %F in (*.c) do @echo %F)  # este no funciona en make, reemplazamos abajo
+SRCS = $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+
+# Ejecutable final
+TARGET = $(BIN_DIR)/game$(EXEEXT)
+
+# Regla por defecto
+all: $(TARGET)
+
+# Regla para compilar el ejecutable
+$(TARGET): $(OBJS)
+	@echo Compilando ejecutable...
+	$(MKDIR)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Regla para compilar cada archivo .c en .o
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo Compilando $<
+	$(MKDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Limpiar archivos generados
+clean:
+	$(RM) $(subst /,\,$(OBJ_DIR))\*.o
+	$(RM) $(subst /,\,$(TARGET))
