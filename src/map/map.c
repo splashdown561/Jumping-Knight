@@ -2,8 +2,7 @@
 #include <map/map.h>
 #include <raylib.h>
 #include <math.h>
-
-Texture2D texPlatform;  // Debe cargarse en la inicialización global
+#include <globals.h>
 
 Platform platforms[MAX_PLATFORMS];
 int numPlatforms = 0;

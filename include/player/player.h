@@ -12,6 +12,7 @@ typedef struct Player {
     float       velocityY;
     bool        isJumping;
     bool        isMovingLeft;
+    bool        isOnFloor;
 
     // Sistema de animaciones
     AnimPlayer  ap;
@@ -22,6 +23,8 @@ void InitPlayer(Player *p, Vector2 *playerSpawn);
 
 // Actualiza lógica de jugador y animaciones, comprobando colisiones con plataformas
 void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms);
+
+extern bool grounded;
 
 // Dibuja al jugador usando el sistema de animaciones
 void DrawPlayer(const Player *p);

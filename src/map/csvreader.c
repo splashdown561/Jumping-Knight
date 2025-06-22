@@ -8,9 +8,6 @@
 
 #define MAX_LINE_LENGTH 4096
 
-// Ya definido correctamente como global
-Vector2 playerSpawn = { 0 };
-
 void LoadMapFromCSV(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -121,5 +118,5 @@ void LoadMapFromCSV(const char *filename) {
 
     fclose(file);
     printf("✅ Carga completa: %d plataformas, %d pinchos, spawn=(%.1f, %.1f)\n",
-           numPlatforms, numSpikes, playerSpawn.x, playerSpawn.y);
+        numPlatforms, numSpikes, playerSpawn.x, playerSpawn.y);
 }

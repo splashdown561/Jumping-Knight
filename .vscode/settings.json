@@ -5,7 +5,10 @@
         "raylib.h": "c",
         "stdbool.h": "c",
         "csvreader.h": "c",
-        "map.h": "c"
+        "map.h": "c",
+        "draw.h": "c",
+        "game.h": "c",
+        "scene.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

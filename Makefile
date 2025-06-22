@@ -25,7 +25,7 @@ OBJ_DIR = obj
 BIN_DIR = bin
 SRCS    = $(shell find $(SRC_DIR) -name '*.c')
 OBJS    = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
-TARGET  = $(BIN_DIR)/game$(EXEEXT)
+TARGET  = game$(EXEEXT)
 
 all: $(TARGET)
 
