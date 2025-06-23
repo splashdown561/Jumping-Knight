@@ -4,3 +4,6 @@ x;y;width;height;type
 200;300;64;16;platform
 300;350;32;32;spike
 200;450;10000;16;platform
+100;300;30;20;platform
+150;300;30;20;platform
+125;250;30;50;platform

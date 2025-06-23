@@ -88,6 +88,9 @@ void UpdatePlayer(Player *p, float dt, Platform platforms[], int numPlatforms) {
 		r.x = p->pos.x;
 	}
 
+	// 🔧 Reseteamos grounded cada frame
+	bool grounded = false;
+
 	Rectangle feet = { p->pos.x, p->pos.y + p->size.y + 1, p->size.x, 2 };
 	for (int i = 0; i < numPlatforms && !grounded; i++)
 		if (platforms[i].active && CheckCollisionRecs(feet, platforms[i].rec)) grounded = true;

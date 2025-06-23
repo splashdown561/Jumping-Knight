@@ -2,4 +2,4 @@ make clean
 
 make
 
-./bin/game
+./game

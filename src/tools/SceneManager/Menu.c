@@ -16,12 +16,14 @@ static void MenuUpdate(float dt) {
 static void MenuDraw() {
 	BeginDrawing();
 		ClearBackground(DARKGRAY);
+		Font prevFont = GuiGetFont();
 		Font coolvetica = LoadFont("assets/fonts/coolveticarg.ttf");
 		GuiSetFont(coolvetica);
 		int prevTextSize = GuiGetStyle(DEFAULT, TEXT_SIZE); // Guardar tamaño original
 		GuiSetStyle(DEFAULT, TEXT_SIZE, 30); 
 		GuiLabel((Rectangle){ 240, 120, 400, 30 }, "Jumping Knight");
 		GuiSetStyle(DEFAULT, TEXT_SIZE, prevTextSize);
+		GuiSetFont(prevFont);
 		GuiButton((Rectangle){ 270, 180, 100, 30 }, "JUGAR");
 	EndDrawing();
 }
